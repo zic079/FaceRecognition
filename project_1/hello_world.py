@@ -10,3 +10,13 @@ Author: Will Chen
 """
 
 # TODO: Write a program that prints "Hello World!" and uses a main function.
+def hello_world():
+    print('Hello World!')
+    return
+
+def main():
+    hello_world()
+    return
+
+if(__name__ == '__main__'):
+    main()
