@@ -30,9 +30,20 @@ for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=
     # grab the raw NumPy array representing the image, then initialize the timestamp
     # and occupied/unoccupied text
     image = frame.array
+    image_small = cv2.resize(image, (160, 120))
+    image_gray = cv2.cvtColor(image_small, cv2.COLOR_BGR2GRAY)
+
+    #cv2.rectangle(image_gray, (30, 10), (130, 110), (255, 255, 255), 3)
+
+    # face reconition
+    face_cascade = cv2.CascadeClassifier('./haarcascade_frontalface_default.xml')
+    faces = face_cascade.detectMultiScale(image_gray, 1.3, 5)
+
+    for (x,y,w,h) in faces:
+        cv2.rectangle(image_gray,(x,y),(x+w,y+h),(255,255,255),2)
 
     # show the frame
-    cv2.imshow("Frame", image)
+    cv2.imshow("Frame", image_gray)
     key = cv2.waitKey(1) & 0xFF
 
     # clear the stream in preparation for the next frame
