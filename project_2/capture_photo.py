@@ -29,7 +29,7 @@ for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=
     faces = face_cascade.detectMultiScale(image_gray, 1.3, 5)
 
     for (x,y,w,h) in faces:
-        image_face = img[y:y+h, x:x+w]
+        image_face = image_gray[y:y+h, x:x+w]
         image_edit = cv2.resize(image_face, (240, 240))
         cv2.rectangle(image_gray,(x,y),(x+w,y+h),(255,255,255),2)
 
