@@ -20,8 +20,8 @@ for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=
     # grab the raw NumPy array representing the image, then initialize the timestamp
     # and occupied/unoccupied text
     image = frame.array
-    image_small = cv2.resize(image, (224, 224))
-    image_gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+    image_small = cv2.resize(image, (240, 240))
+    image_gray = cv2.cvtColor(image_small, cv2.COLOR_BGR2GRAY)
     #cv2.rectangle(image_gray, (30, 10), (130, 110), (255, 255, 255), 3)
 
     # show the frame
@@ -33,6 +33,7 @@ for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=
     #counter += 1
 
     print("current count: " + str(counter))
+    counter += 1
 
     # clear the stream in preparation for the next frame
     rawCapture.truncate(0)
