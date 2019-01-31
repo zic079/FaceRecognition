@@ -32,7 +32,7 @@ for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=
     #cv2.imwrite('./tmp/pic' + counter + '.jpg', image)
     #counter += 1
 
-    print("current count: " + counter)
+    print("current count: " + str(counter))
 
     # clear the stream in preparation for the next frame
     rawCapture.truncate(0)
