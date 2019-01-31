@@ -6,9 +6,9 @@ import cv2
 
 # initialize the camera and grab a reference to the raw camera capture
 camera = PiCamera()
-camera.resolution = (640, 480)
+camera.resolution = (480, 480)
 camera.framerate = 32
-rawCapture = PiRGBArray(camera, size=(640, 480))
+rawCapture = PiRGBArray(camera, size=(480, 480))
 
 # allow the camera to warmup
 time.sleep(0.1)
@@ -20,10 +20,8 @@ for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=
     # grab the raw NumPy array representing the image, then initialize the timestamp
     # and occupied/unoccupied text
     image = frame.array
-    #image_small = cv2.resize(image, (224, 224))
-
-    #image_gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-
+    image_small = cv2.resize(image, (224, 224))
+    image_gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
     #cv2.rectangle(image_gray, (30, 10), (130, 110), (255, 255, 255), 3)
 
     # show the frame
@@ -31,9 +29,10 @@ for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=
     key = cv2.waitKey(1) & 0xFF
 
     # capture a photo
-    if key == ord("c"):
-        print ("current photo counter: " + counter)
-        cv2.imwrite('./tmp/pic' + counter + '.jpg', image)
+    #cv2.imwrite('./tmp/pic' + counter + '.jpg', image)
+    #counter += 1
+
+    print("current count: " + counter)
 
     # clear the stream in preparation for the next frame
     rawCapture.truncate(0)
