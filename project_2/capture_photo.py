@@ -33,14 +33,16 @@ for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=
         image_edit = cv2.resize(image_face, (240, 240))
         cv2.rectangle(image_gray,(x,y),(x+w,y+h),(255,255,255),2)
 
+        # capture a photo
+        cv2.imwrite('./tmp/pic' + str(counter) + '.jpg', image_edit)
+        print("current count: " + str(counter))
+        counter += 1
+
     # show the frame
     cv2.imshow("Frame", image_gray)
     key = cv2.waitKey(1) & 0xFF
 
-    # capture a photo
-    cv2.imwrite('./tmp/pic' + counter + '.jpg', image_edit)
-    print("current count: " + str(counter))
-    counter += 1
+
 
     # clear the stream in preparation for the next frame
     rawCapture.truncate(0)
