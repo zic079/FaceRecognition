@@ -21,7 +21,7 @@ for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=
     # and occupied/unoccupied text
     image = frame.array
     #image_small = cv2.resize(image, (240, 240))
-    image_gray = cv2.cvtColor(image_small, cv2.COLOR_BGR2GRAY)
+    image_gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
     #cv2.rectangle(image_gray, (30, 10), (130, 110), (255, 255, 255), 3)
 
     # face reconition
