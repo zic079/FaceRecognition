@@ -24,9 +24,9 @@ IMG_H, IMG_W, NUM_CHANNELS = 224, 224, 3
 MEAN_PIXEL = np.array([104., 117., 123.]).reshape((1, 1, 3))
 TRAIN_DIR = '../data/train'  # TODO
 VAL_DIR = '../data/validation'  # TODO
-NUM_EPOCHS = 20  # TODO
+NUM_EPOCHS = 5  # TODO
 BATCH_SIZE = 16
-NUM_CLASSES = 20  # TODO
+NUM_CLASSES = 19  # TODO
 
 
 def load_model():
@@ -73,6 +73,7 @@ def load_data(src_path):
     print('-- This set has {} images.'.format(num_images))
     X = np.zeros((num_images, IMG_H, IMG_W, NUM_CHANNELS))
     Y = np.zeros((num_images, 1))
+
     # read images and labels
     for i in range(num_images):
         image_path = image_path_list[i]
@@ -80,6 +81,7 @@ def load_data(src_path):
         # for windows system
         label = int(image_path.split('\\')[-2])
         #label = int(image_path.split('/')[-2])
+
         image = cv2.imread(image_path, 1)
         image = cv2.resize(image, (IMG_H, IMG_W)) - MEAN_PIXEL
         X[i, :, :, :] = image
@@ -100,7 +102,7 @@ def main():
     X_val, Y_val = load_data(VAL_DIR)
 
     # TODO: Train model
-    model.fit(x=X_train, y=Y_train, batch_size=BATCH_SIZE, epochs=NUM_EPOCHS)
+    model.fit(x=X_train, y=Y_train, validation_data=(X_val, Y_val), batch_size=BATCH_SIZE, epochs=NUM_EPOCHS)
 
     # TODO: Save model weights
     model.save("myVGG16Model")
